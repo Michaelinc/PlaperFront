@@ -1,0 +1,48 @@
+<div style="margin-left: 15px;">
+    <p style="color: steelblue;font-family:helvetica; padding-right: 5px;"><b>Chequera</b></p>
+    <p-card>
+        <p style="color: steelblue;font-family:helvetica; padding-right: 10px;">Registrar</p>
+        <br>
+        <div class="ui-g">
+            <form [formGroup]="formGroup" (submit)="saveData()">
+                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                    <span class="ui-float-label">
+                        <input id="float-input" required type="text" size="40" formControlName="nameAccount" pInputText>
+                        <label for="float-input">Nombre de Cuenta</label>
+                    </span>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                    <span class="ui-float-label">
+                        <input id="float-input" type="text" size="40" formControlName="id" pInputText>
+                        <label for="float-input">Numero de Cuenta</label>
+                    </span>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                    <span class="ui-float-label">
+                        <input id="float-input" required type="number" step="1000" pattern="" size="40"
+                            formControlName="amount" pInputText>
+                        <label for="float-input">Saldo Inicial</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                    <p-dropdown [options]="group" formControlName="group" placeholder="Seleccione un Grupo"
+                        optionLabel="name" [showClear]="true"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                    <p-dropdown [options]="currency" formControlName="currency" placeholder="Seleccione una Divisa"
+                        optionLabel="name" [showClear]="true"></p-dropdown>
+                </div>
+                <div class="ui-g-12  ui-md-6 ui-lg-12">
+                    <span class="ui-float-label">
+                        <textarea autoResize="autoResize" id="float-input" rows="5" cols="150%"
+                            formControlName="description" pInputTextarea></textarea>
+                        <label for="float-input">Descripción</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                    <button pButton [disabled]="formGroup.invalid" (click)="saveData()" type="button" label="Enviar" class="ui-button-success"></button>
+                </div>
+            </form>
+        </div>
+    </p-card>
+</div>
