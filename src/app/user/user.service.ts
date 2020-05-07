@@ -19,8 +19,11 @@ export class UserService {
     return this.http.get<User>(environment.apiUrl + 'usuarios/login/'+user.email +'/'+ user.password);
   }
 
-  public logoutUser(user : User): Observable<User>{
-    return this.http.get<User>(environment.apiUrl + 'usuarios/cerrar-sesion/'+user.email);
+  public logoutUser(user : User): Observable<boolean>{
+    return this.http.put<boolean>(environment.apiUrl + 'usuarios/cerrar-sesion/'+ user.email,user);
+  }
+  public verifySesionUser(email : string): Observable<boolean>{
+    return this.http.get<boolean>(environment.apiUrl + 'usuarios/validar-sesion/'+ email);
   }
 
 }

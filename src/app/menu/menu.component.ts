@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api/menuitem';
+import { MessageService } from 'primeng/api';
+import { User } from '../model/User';
+import { UserService } from '../user/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
+  providers : [MessageService,UserService]
 })
 export class MenuComponent implements OnInit {
 
@@ -12,7 +18,26 @@ export class MenuComponent implements OnInit {
 
   items: MenuItem[];
 
-  constructor() { }
+  constructor(private messageService : MessageService, private userService: UserService, private _route : ActivatedRoute, private  router : Router) { 
+    let email = localStorage.getItem("email");
+    if(email != null){
+      this.userService.verifySesionUser(email).subscribe(
+        res => {
+          if(res == false){
+            this.router.navigate(['']);
+          }
+        },
+        err => {
+          this.messageService.add({severity:'Autenticacion', summary: 'Error', detail:''+err});
+        }
+      )
+      
+    }
+    else {
+      this.router.navigate([''])
+      this.messageService.add({severity:'Autenticacion', summary: 'No ha inicado sesión', detail:'Error en la Autentacion'});
+    }
+  }
 
   ngOnInit(): void {
     this.items = [
@@ -32,5 +57,20 @@ export class MenuComponent implements OnInit {
     ]
   }
 
-  logout(){}
+  logout(){
+    let user = new User();
+    user. email = localStorage.getItem('email');
+    console.log(user);
+    this.userService.logoutUser(user).subscribe(
+      res => {
+        let nombre = this._route.snapshot.paramMap.get('nombre');
+        this.router.navigate(['']);
+        this.messageService.add({severity:'success', summary: 'Exito', detail:'Se a cerrado tu cuenta '+ nombre});
+        localStorage.removeItem('email');
+      },
+      err => {
+        this.messageService.add({severity:'error', summary: 'Error', detail:'Se ha producido un error :  '+ err});
+      }
+    );
+  }
 }

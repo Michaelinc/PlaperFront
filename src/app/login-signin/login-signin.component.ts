@@ -46,8 +46,9 @@ export class LoginSigninComponent implements OnInit {
     this.userService.loginUser(this.formGroupLogin.value).subscribe(
       res => {
         if(res != null){
-          this.router.navigate(["/menu"]);
+          this.router.navigate(["/menu/"+res.nombre]);
           this.messageService.add({severity:'success', summary: 'Exito', detail:'Bienvenido '+ res.nombre});
+          localStorage.setItem('email',res.email);
           
         }
       },

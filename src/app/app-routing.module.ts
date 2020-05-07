@@ -10,11 +10,9 @@ import { CheckbookComponent } from './account/checkbook/checkbook.component';
 
 
 const routes: Routes = [
+
   {
-    path : '' , component : LoginSigninComponent
-  },
-  {
-    path : 'menu' , component : MenuComponent, children : [
+    path : 'menu/:nombre' , component : MenuComponent, children : [
       {
         path : 'cuentas', component : AccountComponent, children : [
           {
@@ -34,6 +32,9 @@ const routes: Routes = [
       }
 
     ]
+  },
+  {
+    path : '' , component : LoginSigninComponent, pathMatch: "full"
   }
 ];
 
