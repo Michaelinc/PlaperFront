@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginSigninComponent } from './login-signin/login-signin.component';
+import { LoginSigninComponent } from './log/login-signin/login-signin.component';
 import { MenuComponent } from './menu/menu.component';
 import { AccountComponent } from './account/account.component';
 import { SavingaccountComponent } from './account/savingaccount/savingaccount.component';
 import { CreditcardComponent } from './account/creditcard/creditcard.component';
 import { WalletComponent } from './account/wallet/wallet.component';
 import { CheckbookComponent } from './account/checkbook/checkbook.component';
+import { ChangepasswordComponent } from './log/changepassword/changepassword.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,10 @@ const routes: Routes = [
     ]
   },
   {
-    path : '' , component : LoginSigninComponent, pathMatch: "full"
+    path:'recuperarcontrasena', component : ChangepasswordComponent
+  },
+  {
+    path : 'plaper.com' , component : LoginSigninComponent, pathMatch: "full"
   }
 ];
 

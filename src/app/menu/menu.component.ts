@@ -6,6 +6,7 @@ import { UserService } from '../user/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -25,6 +26,8 @@ export class MenuComponent implements OnInit {
         res => {
           if(res == false){
             this.router.navigate(['']);
+          }else{
+            this.messageService.add({severity:'success', summary: 'Hola!!!', detail:'Bienvenido '+localStorage.getItem('nombre')});
           }
         },
         err => {
@@ -64,7 +67,7 @@ export class MenuComponent implements OnInit {
     this.userService.logoutUser(user).subscribe(
       res => {
         let nombre = this._route.snapshot.paramMap.get('nombre');
-        this.router.navigate(['']);
+        this.router.navigate(['plaper.com']);
         this.messageService.add({severity:'success', summary: 'Exito', detail:'Se a cerrado tu cuenta '+ nombre});
         localStorage.removeItem('email');
       },

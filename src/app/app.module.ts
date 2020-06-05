@@ -12,8 +12,9 @@ import { CreditcardComponent } from './account/creditcard/creditcard.component';
 import { CheckbookComponent } from './account/checkbook/checkbook.component';
 import { CheckComponent } from './account/check/check.component';
 import { WalletComponent } from './account/wallet/wallet.component';
-import { LoginSigninComponent } from './login-signin/login-signin.component';
+import { LoginSigninComponent } from './log/login-signin/login-signin.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { ChangepasswordComponent } from './log/changepassword/changepassword.component';
 
 import {SidebarModule} from 'primeng/sidebar';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -53,7 +54,8 @@ import { CommonModule } from '@angular/common';
     CheckComponent,
     WalletComponent,
     LoginSigninComponent,
-    TransactionComponent
+    TransactionComponent,
+    ChangepasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,8 @@ export class User{
     email : string;
     password : string;
     saldo : number;
-	divisa : string;
+    divisa : string;
+    link : any;
 	habilitarSeparadorAutomatico : boolean;
 	habilitarSaldoEjecucion : boolean;
 }
