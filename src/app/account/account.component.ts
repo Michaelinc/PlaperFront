@@ -24,7 +24,7 @@ export class AccountComponent implements OnInit {
           icon: 'pi pi-fw pi-plus',
           items: [
             {
-              label: 'Cuenta de Ahorro', routerLink: ["ahorros"], command: (event) => {}
+              label: 'Cuenta Ahorro/Efectivo/Cheques', routerLink: ["miscuentas"], command: (event) => {}
             },
             {
               label: 'Tarjeta de Crédito',routerLink: ["credito"], command: ($event) => { }
@@ -52,7 +52,7 @@ export class AccountComponent implements OnInit {
         {
           label: 'Nueva Grupo',
           icon: 'pi pi-fw pi-plus',
-          routerLink : [""],
+          routerLink : ["grupos"],
           command: (index) => {
           }
 

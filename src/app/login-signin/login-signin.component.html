@@ -1,0 +1,84 @@
+<div class="card" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <div style="background-color: gray; border-radius: 5px; text-align: center; font-size: 50px;">
+                <p style= "color: white;font-family:helvetica"><b>Bienvenido</b></p>
+            </div>
+        </div>
+        <form [formGroup]="formGroupLogin" (submit)="login()">
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" size="30" formControlName = "email" pInputText> 
+                <label for="float-input">Usuario</label>
+            </span>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <span class="ui-float-label">
+                <input id="float-input" type="password" size="30" formControlName = "password" pInputText> 
+                <label for="float-input">Contraseña</label>
+            </span>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <button pButton [disabled]="formGroupLogin.invalid"  (click) = "login()" type="button" label="Iniciar Sesion" class="ui-button-success"></button>
+        </div>
+        </form>
+    </div>
+
+<br>
+<br>
+
+    <div class="ui-g" style="margin-left: 20px;">
+        <div class="ui-g-12 ui-md-6 ui-lg-12" style="margin-left: 0px;">
+            <div style="background-color: gray; border-radius: 5px; text-align: center; font-size: 35px;
+            width: 40%;">
+                <p style= "color: white;font-family:helvetica"><b>Registrate aquí</b></p>
+            </div>
+        </div>
+    <form [formGroup]="formGroup" (submit)="save()">
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" size="30" formControlName="nombre" pInputText> 
+                <label for="float-input">Nombre</label>
+            </span>
+        </div>
+<!--
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <span class="ui-float-label">
+                <input id="float-input" type="text" size="30" pInputText> 
+                <label for="float-input">Cédula</label>
+            </span>
+        </div>
+-->    
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <span class="ui-float-label">
+                <input id="float-input" type="email" size="30" formControlName="email" pInputText> 
+                <label for="float-input">Correo Electronico</label>
+            </span>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <div>
+ 
+                <span class="ui-float-label">
+                    <input id="float-input" type="password" size="30" formControlName="password" pInputText> 
+                    <label for="float-input">Contraseña</label>
+                </span>         
+<!--                <div>
+                <button pButton  style="width: 14px; height: 14px;" icon="display  pi pi-eye : pi pi-eye-slash " (click) = "change()" ></button>
+                </div>  
+-->
+            </div>
+
+        </div>
+
+<!--       <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <p-dropdown [options]="gender" [(ngModel)]="selectedGender" placeholder="Seleccione un Genero" optionLabel="name" [showClear]="true"></p-dropdown>
+        </div>
+-->
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <button pButton [disabled]="formGroup.invalid" (click)="save()" type="button" label="Registrar" class="ui-button-success"></button>
+        </div>
+    </form>
+    </div>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
