@@ -7,6 +7,7 @@ import { SavingaccountComponent } from './account/savingaccount/savingaccount.co
 import { CreditcardComponent } from './account/creditcard/creditcard.component';
 import { WalletComponent } from './account/wallet/wallet.component';
 import { CheckbookComponent } from './account/checkbook/checkbook.component';
+import { GroupComponent } from './group/group.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,7 @@ const routes: Routes = [
       {
         path : 'cuentas', component : AccountComponent, children : [
           {
-            path : 'ahorros', component : SavingaccountComponent
+            path : 'miscuentas', component : SavingaccountComponent
           },
           {
             path : 'credito', component : CreditcardComponent
@@ -26,6 +27,9 @@ const routes: Routes = [
           },
           {
             path : 'chequera', component : CheckbookComponent
+          },
+          {
+            path : 'grupos', component : GroupComponent
           }
 
         ]

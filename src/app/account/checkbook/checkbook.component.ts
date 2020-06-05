@@ -12,14 +12,14 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class CheckbookComponent implements OnInit {
   group: Group[] = [
-    { code: "0", name: "Grupo Ahorro", description: "Para ahorrar" },
-    { code: "1", name: "Grupo Gasto", description: "Para gastar" },
-    { code: "2", name: "Grupo mecateo", description: "Para mecatear" },
+    { id: "0", nombre: "Grupo Ahorro", saldo : 0,divisa: "" , emailUsuario : ""},
+    { id: "1", nombre: "Grupo Gasto", saldo : 0,divisa: "" , emailUsuario : ""},
+    { id: "2", nombre: "Grupo mecateo", saldo : 0,divisa: "" , emailUsuario : ""},
   ];
   currency: Currency[] = [
-    { code: 0, name: "USD"},
-    { code: 1, name: "COP"},
-    { code: 2, name: "EUR"},
+    { divisa: "USD"},
+    { divisa: "COP"},
+    { divisa: "EUR"},
   ];
   selectedGroup: Group;
   selectedCurrency: Currency

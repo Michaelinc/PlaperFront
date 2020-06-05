@@ -1,5 +1,7 @@
 export class Group{
-    code : string;
-    name : string;
-    description : string;
+    id : string;
+    nombre : string;
+    saldo : number;
+    divisa : string;
+    emailUsuario : string;
 }

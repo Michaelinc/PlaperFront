@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Gender } from '../model/Gender';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder, MinLengthValidator } from '@angular/forms';
-import { UserService } from '../user/user.service';
+import { UserService } from '../Sevices/user.service';
 import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
@@ -49,6 +49,7 @@ export class LoginSigninComponent implements OnInit {
           this.router.navigate(["/menu/"+res.nombre]);
           this.messageService.add({severity:'success', summary: 'Exito', detail:'Bienvenido '+ res.nombre});
           localStorage.setItem('email',res.email);
+          localStorage.setItem('nombre',res.nombre);
           
         }
       },

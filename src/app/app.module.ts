@@ -33,6 +33,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { FormsModule } from '@angular/forms';
 import {TabViewModule} from 'primeng/tabview';
 import {SlideMenuModule} from 'primeng/slidemenu';
+import {CheckboxModule} from 'primeng/checkbox';
 
 
 import { HttpClientModule } from '@angular/common/http'
@@ -40,6 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms/';
 
 
 import { CommonModule } from '@angular/common';
+import { GroupComponent } from './group/group.component';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { CommonModule } from '@angular/common';
     CheckComponent,
     WalletComponent,
     LoginSigninComponent,
-    TransactionComponent
+    TransactionComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,8 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     CommonModule,
     SlideMenuModule,
-    ToastModule
+    ToastModule,
+    CheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

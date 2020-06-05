@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api/menuitem';
 import { MessageService } from 'primeng/api';
 import { User } from '../model/User';
-import { UserService } from '../user/user.service';
+import { UserService } from '../Sevices/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -64,9 +64,10 @@ export class MenuComponent implements OnInit {
     this.userService.logoutUser(user).subscribe(
       res => {
         let nombre = this._route.snapshot.paramMap.get('nombre');
-        this.router.navigate(['']);
         this.messageService.add({severity:'success', summary: 'Exito', detail:'Se a cerrado tu cuenta '+ nombre});
         localStorage.removeItem('email');
+        localStorage.removeItem('nombre');
+        this.router.navigate(['']);
       },
       err => {
         this.messageService.add({severity:'error', summary: 'Error', detail:'Se ha producido un error :  '+ err});

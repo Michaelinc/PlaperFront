@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { Group } from 'src/app/model/Group';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { SavingaccountserviceService } from './savingaccountservice.service';
-import { SavingAccount } from 'src/app/model/SavingAccount';
-import { Bank } from 'src/app/model/Bank';
+import { SavingaccountserviceService } from '../../Sevices/savingaccountservice.service';
 import { Currency } from 'src/app/model/Currency';
+import { GenAccount } from 'src/app/model/GenAccount';
+import { GroupserviceService } from 'src/app/Sevices/groupservice.service';
+import { MessageService } from 'primeng/api';
+import { Types } from 'src/app/model/Types';
 
 @Component({
   selector: 'app-savingaccount',
@@ -12,44 +14,53 @@ import { Currency } from 'src/app/model/Currency';
   styleUrls: ['./savingaccount.component.css']
 })
 export class SavingaccountComponent implements OnInit {
-  group: Group[] = [
-    { code: "0", name: "Grupo Ahorro", description: "Para ahorrar" },
-    { code: "1", name: "Grupo Gasto", description: "Para gastar" },
-    { code: "2", name: "Grupo mecateo", description: "Para mecatear" },
-  ];
-
-  bank: Bank[] = [
-    { code: "0", name: "Bancolombia"},
-    { code: "1", name: "Davivienda"},
-    { code: "2", name: "Banco Agrario"},
-  ];
+  group: Group[];
 
   currency: Currency[] = [
-    { code: 0, name: "USD"},
-    { code: 1, name: "COP"},
-    { code: 2, name: "EUR"},
+    { divisa: "USD"},
+    { divisa: "COP"},
+    { divisa: "EUR"},
+  ];
+  tipos: Types[] = [
+    { tipo: "CHEQUES"},
+    { tipo: "AHORROS"},
+    { tipo: "EFECTIVO"},
+    { tipo: "TARJETA-CREDITO"},
   ];
 
   selectedGroup: Group;
-  selectedBank: Bank;
   selectedCurrency : Currency;
-
-  savingAccount: SavingAccount ;
+  checked: boolean = false;
+  checkedP: boolean = false;
+  savingAccount: GenAccount ;
 
   //FormGroup
   public formGroup: FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder, public savingAcountService: SavingaccountserviceService) {
+  constructor(private messageService : MessageService, private formBuilder: FormBuilder, public savingAcountService: SavingaccountserviceService, public groupService : GroupserviceService) {
+    groupService.listGroup(localStorage.getItem('email')).subscribe(
+      res => {
+        if(res != null){
+          this.group = res;
+        }
+        err => {
+          this.messageService.add({severity:'error', summary: 'Error', detail:'Error al cargar grupos '+ err});
+        }
+      }
+      );
+
     this.formGroup = this.formBuilder.group(
       {
-        id : new FormControl('',[Validators.required]),
-        nameAccount : new FormControl('',[Validators.required]),
-        bank : new FormControl(this.bank[0],[Validators.required]),
-        currency : new FormControl(this.currency[0],[Validators.required]),
-        amount : new FormControl('',[Validators.required]),
-        group : new FormControl(this.group[0],[Validators.required]),
-        description : new FormControl('')
+        nombre : new FormControl('',[Validators.required]),
+        saldoInicial : new FormControl('',[Validators.required]),
+        divisa : new FormControl(this.currency,[Validators.required]),
+        descripcion : new FormControl(''),
+        habilitarCheques : new FormControl(this.checked),
+        adicionarPatrimonioNeto : new FormControl(this.checkedP),
+        tipo : new FormControl(this.tipos[0],[Validators.required]),
+        idGrupo : new FormControl(this.group,[Validators.required]),
+        limiteCredito : new FormControl('',[Validators.required]),
       }
     );
   }
@@ -57,8 +68,42 @@ export class SavingaccountComponent implements OnInit {
   }
 
   saveData(){
-    let data : SavingAccount = this.savingAcountService.saveSavingAccountPrueba(this.formGroup.value);
-    console.log(data);
-  }
+    let data : GenAccount =  new GenAccount();
+    let idGrupo : Group = this.formGroup.get('idGrupo').value;
+    let divisa : Currency = this.formGroup.get('divisa').value;
+    let tipo : Types = this.formGroup.get('tipo').value;
+    data.nombre = this.formGroup.get('nombre').value;
+    data.saldoInicial = this.formGroup.get('saldoInicial').value;
+    data.divisa = divisa.divisa;
+    data.descripcion = this.formGroup.get('descripcion').value;
+    data.habilitarCheques = this.formGroup.get('habilitarCheques').value;
+    data.adicionarPatrimonioNeto = this.formGroup.get('adicionarPatrimonioNeto').value;
+    data.tipo = tipo.tipo;
+    data.idGrupo = idGrupo.id;
+    data.emailUsuario = localStorage.getItem("email");
 
+    console.log(data);
+
+    this.savingAcountService.saveSavingAccount(data).subscribe(
+      res => {
+        if(res != null){
+          this.messageService.add({severity:'success', summary: 'Éxito', detail:'Se ha guardado Correctamente la cuenta'});
+          this.limpiarCampos();
+        }
+      },
+      err => {
+        this.messageService.add({severity:'error', summary: 'Error', detail:'Error al guardar '+ err.error});
+      }
+    );
+  }
+limpiarCampos(){
+  this.formGroup.reset();
+}
+isDisabled :boolean =  false/*(){
+  let tipo : Types = this.formGroup.get('tipo').value;
+  if(tipo.tipo =  "TARJETA-CREDITO"){
+    return true
+  }
+  return false
+}*/
 }

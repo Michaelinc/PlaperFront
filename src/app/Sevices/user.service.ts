@@ -16,7 +16,7 @@ export class UserService {
   }
 
   public loginUser(user : User): Observable<User>{
-    return this.http.get<User>(environment.apiUrl + 'usuarios/login/'+user.email +'/'+ user.password);
+    return this.http.put<User>(environment.apiUrl + 'usuarios/login/'+user.email +'/'+ user.password,user);
   }
 
   public logoutUser(user : User): Observable<boolean>{
