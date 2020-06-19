@@ -1,0 +1,44 @@
+<div style="margin-left: 15px;background-color: rgb(26,26,26); border-color: rgb(17,17,17);">
+    <div style="color: whitesmoke;font-family:helvetica;font-size: 30px; padding-left: 10px; padding-top: 5px;">
+        <b>Registrar</b></div>
+    <p-card>
+        <div class="ui-g" style="border-color: rgb(17,17,17);">
+            <form [formGroup]="formGroup" (submit)="verificar( )">
+                <div class="ui-g-6 ui-md-6 ui-lg-12">
+                    <span class="ui-float-label">
+                        <input id="float-input" required type="text" size="40" formControlName="nombre" pInputText>
+                        <label for="float-input">Nombre</label>
+                    </span>
+                </div>
+                <div class="ui-g-6 ui-md-6 ui-lg-12">
+                    <p-dropdown [options]="icons" formControlName="codigoIcono" filter="true"
+                        [(ngModel)]='selectedIcon'>
+                        <ng-template let-item pTemplate="selectedItem">
+                            <img src="assets/icons/{{item.label}}.png" style="width:16px;vertical-align:middle" />
+                            <span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
+                        </ng-template>
+                        <ng-template let-icon pTemplate="item">
+                            <div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+                                <img src="assets/icons/{{icon.label}}.png"
+                                    style="width:24px;position:absolute;top:1px;left:5px" />
+                                <div style="font-size:14px;float:right;margin-top:4px">{{icon.label}}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                    <p-dropdown class="ui-dropdown-clearable" [readonly]="enEdicion" [options]="tipo"
+                        formControlName="tipo" [(ngModel)]='selectedTipo'>
+                        <ng-template let-item pTemplate="selectedItem">
+                            {{item.value}}
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                    <button pButton (click)="verificar()" type="button" label="{{label}}"
+                        class="ui-button-success"></button>
+                </div>
+            </form>
+        </div>
+    </p-card>
+</div>

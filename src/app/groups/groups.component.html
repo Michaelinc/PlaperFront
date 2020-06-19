@@ -1,0 +1,15 @@
+<p-card>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <div style=" text-align: left; font-size: 30px;">
+                <p style="color: Black;font-family:helvetica;"><b>Grupos</b></p>
+            </div>
+
+            <p-tabMenu [model]="listitems" [activeItem]="activeItem"></p-tabMenu>
+        </div>
+    </div>
+
+    <app-group [recivedGroupEdit]="sendGroup" *ngIf='index == 1'></app-group>
+
+    <app-grouptable *ngIf='index == 2' (selectedGroup)='llenarCamposEditar($event)'></app-grouptable>
+</p-card>

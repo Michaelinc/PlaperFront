@@ -1,69 +1,81 @@
-<div style="margin-left: 15px;">
-    <p style="color: steelblue;font-family:helvetica; padding-right: 5px;"><b>Cuentas</b></p>
-    <p-card>
-        <p style="color: steelblue;font-family:helvetica; padding-right: 10px;">Registrar</p>
+
+<div style="margin-left: 15px;background-color: rgb(26,26,26); border-color: rgb(17,17,17);">
+    <div style="color: whitesmoke;font-family:helvetica;font-size: 30px; padding-left: 10px; padding-top: 5px;"><b>Registrar</b></div>
+    <p-card >
         <br>
-        <div class="ui-g">
-            <form [formGroup]="formGroup" (submit)="saveData( )">
+        <div class="ui-g" style="border-color: rgb(17,17,17);">
+            <form [formGroup]="formGroup" (submit)="verificar( )">
                 <div class="ui-g-12 ui-md-6 ui-lg-6">
-                    <p-dropdown [options]="tipos" formControlName="tipo" placeholder="Seleccione una Tipo"
-                        optionLabel="tipo" [showClear]="true"></p-dropdown>
+                    <p-dropdown [readonly] = "enEdicion" [(ngModel)] = 'selectedTipo' (onChange)="verificarTipo()" [options]="tipos" formControlName="tipo">
+                        <ng-template let-item pTemplate="selectedItem">
+                            {{item.label}}
+                        </ng-template>
+                    </p-dropdown>
                 </div>
-                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
                     <span class="ui-float-label">
-                        <input id="float-input" required type="text" size="40" formControlName="nombre" pInputText>
+                        <input id="float-input" required type="text" size="23" formControlName="nombre" pInputText [(ngModel)] = "selectedNombre">
                         <label for="float-input">Nombre de Cuenta</label>
                     </span>
                 </div>
-                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
                     <span class="ui-float-label">
-                        <input id="float-input" required type="number" step="1000" pattern="" size="40"
-                            formControlName="saldoInicial" pInputText>
+                        <input [readonly] = "enEdicion" id="float-input" required type="number" step="1000" pattern="" size="40"
+                            formControlName="saldoInicial" pInputText [(ngModel)]="selectedSaldoInicial">
                         <label for="float-input">Saldo Inicial</label>
                     </span>
                 </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-6">
-                    <p-dropdown [options]="group" formControlName="idGrupo" placeholder="Seleccione un Grupo"
-                        optionLabel="nombre" [showClear]="true"></p-dropdown>
+                    <p-dropdown [options]="group" formControlName="idGrupo" [(ngModel)] = 'selectedGroup' placeholder="seleccione un grupo">
+                        <ng-template let-item pTemplate="selectedItem">
+                            {{item.label}}
+                        </ng-template>
+                    </p-dropdown>
                 </div>
                 <div class="ui-g-12 ui-md-6 ui-lg-6">
-                    <p-dropdown [options]="currency" formControlName="divisa" placeholder="Seleccione una Divisa"
-                        optionLabel="divisa" [showClear]="true"></p-dropdown>
+                    <p-dropdown [readonly] = "enEdicion" [options]="currency" formControlName="divisa" [(ngModel)]="selectedDivisa">
+                        <ng-template let-item pTemplate="selectedItem">
+                            {{item.label}}
+                        </ng-template>
+                    </p-dropdown>
                 </div>
-                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                <div class="ui-g-6 ui-md-6 ui-lg-6" *ngIf = 'limiteCreditoBoolean == true'>
+                    <span class="ui-float-label">
+                        <input [readonly] = "enEdicion" required id="float-input" required type="number" step="1000" pattern="" size="40"
+                            formControlName="limiteCredito" pInputText [(ngModel)]="selectedLimiteCredito">
+                        <label for="float-input">Limite de Credito</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
                     <div>Habilitar Cheques
-                        <p-checkbox [(ngModel)]="checked" binary="true" formControlName="habilitarCheques" ></p-checkbox>
+                        <p-checkbox [(ngModel)]="checked" binary="true" formControlName="habilitarCheques"></p-checkbox>
                     </div>
                 </div>
-                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
                     <div>Adicionar Patrimonio
                         <p-checkbox [(ngModel)]="checkedP" binary="true" formControlName="adicionarPatrimonioNeto" ></p-checkbox>
                     </div>
                 </div>
-                <!--
-                <div class="ui-g-6 ui-md-6 ui-lg-6">
+                <div class="ui-g-12  ui-md-12 ui-lg-12">
                     <span class="ui-float-label">
-                        <input [disableControl]="isDisabled" required id="float-input" required type="number" step="1000" pattern="" size="40"
-                            formControlName="limiteCredito" pInputText>
-                        <label for="float-input">Limite</label>
-                    </span>
-                </div>
-                -->
-                <div class="ui-g-12  ui-md-6 ui-lg-12">
-                    <span class="ui-float-label">
-                        <textarea autoResize="autoResize" id="float-input" rows="5" cols="150%"
+                        <textarea autoResize="autoResize" id="float-input" rows="5" cols="25%"
                             formControlName="descripcion" pInputTextarea></textarea>
                         <label for="float-input">Descripción</label>
                     </span>
                 </div>
-                <div class="ui-g-12 ui-md-6 ui-lg-12">
-                    <button pButton  (click)="saveData()" type="button" label="Enviar"
+                <div class="ui-g-12 ui-md-12 ui-lg-12">
+                    <button [disabled] ="formGroup.invalid" pButton  (click)="verificar()" type="button" label="{{label}}"
                         class="ui-button-success"></button>
                 </div>
             </form>
         </div>
     </p-card>
 </div>
+
 <!--<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>-->
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
-<!--"[disabled]="formGroup.invalid"-->
+<!--"-->
+
+
+
+

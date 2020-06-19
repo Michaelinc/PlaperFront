@@ -1,0 +1,15 @@
+<p-card>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <div style=" text-align: left; font-size: 30px;">
+                <p style="color: Black;font-family:helvetica;"><b>Categorias</b></p>
+            </div>
+
+            <p-tabMenu [model]="listitems" [activeItem]="activeItem"></p-tabMenu>
+        </div>
+    </div>
+
+<app-category [recivedCategoryEdit]="sendCategory" *ngIf='index == 1'></app-category>
+
+<app-categorytable *ngIf='index == 2' (selectedCategory)='llenarCamposEditar($event)'></app-categorytable>
+</p-card>

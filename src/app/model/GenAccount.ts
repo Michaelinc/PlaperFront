@@ -7,7 +7,8 @@ export class GenAccount {
     divisa : string;
     descripcion : string;
     habilitarCheques : boolean;
-	adicionarPatrimonioNeto : boolean;
+    adicionarPatrimonioNeto : boolean;
+    limiteCredito : number; 
 	tipo : string;
 	idGrupo : string;
 	emailUsuario : string;

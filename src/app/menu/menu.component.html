@@ -1,22 +1,22 @@
-<p-sidebar [(visible)]="display">
+<p-sidebar  [(visible)]="display">
     <br><br>
     <p-panelMenu [model]="items" [style]="{'width':'250px'}"></p-panelMenu>
 
   
 </p-sidebar>
 
-<p-toolbar>
-    <div class="ui-toolbar-group-left">
+<p-toolbar >
+    <div class="ui-toolbar-group-left" >
         <button pButton type="button" style="width: 150px;" (click)="display = true" label="Menú"
         icon="pi pi-id-card"></button>
 
     </div>
-    <div class="ui-toolbar-group-right">
+    <div class="ui-toolbar-group-right" >
         <button pButton type="button" style="width: 150px;" (click)="logout()" label= "Cerrar Sesión"
         icon="pi pi-id-card"></button>
 
     </div>
    
 </p-toolbar>
-
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
 <router-outlet></router-outlet>

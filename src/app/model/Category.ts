@@ -1,5 +1,7 @@
 export class Category {
-    code : string;
-    name : string;
-    description : string;
+    id : number;
+    nombre : string;
+    tipo : string;
+    codigoIcono : string;
+    emailUsuario : string;
 }

@@ -1,0 +1,16 @@
+<p-card>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <div style=" text-align: left; font-size: 30px;">
+                <p style="color: Black;font-family:helvetica;"><b>Ajustes</b></p>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-lg-2">
+                <p-panelMenu [model]="items"></p-panelMenu>
+            </div>
+            <div class="ui-g-6 ui-md-6 ui-lg-10">
+                <app-categories *ngIf='index == 1'></app-categories>
+                <app-tag *ngIf='index == 2'></app-tag>
+            </div>
+        </div>
+    </div>
+</p-card>

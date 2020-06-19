@@ -1,3 +1,4 @@
 export class Currency{
-    divisa : string;
+    label : string;
+    value : string;
 }

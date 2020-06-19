@@ -1,0 +1,17 @@
+
+<p-card>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-md-6 ui-lg-12">
+            <div style=" text-align: left; font-size: 30px;">
+                <p style="color: Black;font-family:helvetica;"><b>Transacciones</b></p>
+            </div>
+<p-tabMenu [model]="listitems" [activeItem]="activeItem"></p-tabMenu>
+        </div>
+    </div>
+
+<app-transaction *ngIf = 'index == 1'></app-transaction>
+
+<app-transactiontable  *ngIf = 'index == 2' ></app-transactiontable>
+
+<app-adjustmenttable  *ngIf = 'index == 3' ></app-adjustmenttable>
+</p-card>

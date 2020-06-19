@@ -1,0 +1,31 @@
+<div style="margin-left: 15px;background-color: rgb(26,26,26); border-color: rgb(17,17,17);">
+    <div style="color: whitesmoke;font-family:helvetica;font-size: 30px; padding-left: 10px; padding-top: 5px;">
+        <b>Ajustar Saldo</b></div>
+    <p-card>
+        <br>
+        <div class="ui-g">
+            <form [formGroup]="formGroup" (submit)="saveData( )">
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p-dropdown readonly = "true" [options]="account" formControlName="id" [(ngModel)]="selectedAccount">
+                    <ng-template let-item pTemplate="selectedItem">
+                        {{item.label}}
+                    </ng-template>
+                </p-dropdown>
+            </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-6">
+                    <span class="ui-float-label">
+                        <input id="float-input" required type="number"  step="1000" pattern="" size="40"
+                            formControlName="saldo" pInputText [(ngModel)]="selectedSaldo">
+                        <label for="float-input">Saldo Nuevo</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                    <button pButton (click)="saveData()" type="button" label="Enviar"
+                        class="ui-button-success"></button>
+                </div>
+            </form>
+        </div>
+    </p-card>
+</div>
+<!--<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>-->
+<p-toast [style]="{marginTop: '80px'}"></p-toast>

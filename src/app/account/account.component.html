@@ -1,16 +1,19 @@
-<div>
+<p-card>
     <div class="ui-g">
         <div class="ui-g-12 ui-md-6 ui-lg-12">
             <div style=" text-align: left; font-size: 30px;">
-                <p style="color: steelblue;font-family:helvetica;"><b>Cuentas Bancarias</b></p>
+                <p style="color: Black;font-family:helvetica;"><b>Cuentas Bancarias</b></p>
             </div>
-
-            <button #btn type="button" pButton icon="pi pi-bars" (click)="menu.toggle($event)"></button>
-            <p-slideMenu #menu [model]="items" [popup]="true" [menuWidth]="180" [viewportHeight]="260"
-                effectDuration="5" easing="ease-in">
-            </p-slideMenu>
-
+            <p-tabMenu [model]="listitems" [activeItem]="activeItem"></p-tabMenu>
         </div>
     </div>
-</div>
-<router-outlet></router-outlet>
+
+    <app-savingaccount [recivedAccountEdit]="sendAccount" *ngIf='index == 1'></app-savingaccount>
+
+    <app-savingaccounttable *ngIf='index == 2' (selectedAccount)='llenarCamposEditar($event)'
+        (selectedAccountAdjustment)='llenarCamposAdjuste($event)'></app-savingaccounttable>
+
+    <app-adjustment *ngIf='index == 3' [recivedAccountAdjustment]="sendAccountAdjustment"
+        (emitChange)='generarCambio($event)'></app-adjustment>
+
+</p-card>

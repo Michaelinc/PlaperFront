@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api/menuitem';
+import { FormGroup } from '@angular/forms';
+import { GenAccount } from '../model/GenAccount';
+
 
 @Component({
   selector: 'app-account',
@@ -11,126 +14,71 @@ export class AccountComponent implements OnInit {
 
   index: number;
   items: MenuItem[];
+  listitems: MenuItem[];
   label: string;
   action: string;
+  activeItem: MenuItem;
+
+  sendAccount : GenAccount;
+
+  sendAccountAdjustment : GenAccount;
+
 
   ngOnInit() {
-    this.items = [
-      {
-        label: 'Registrar',
-        icon: 'pi pi-fw pi-file',
-        items: [{
-          label: 'Nueva Cuenta',
-          icon: 'pi pi-fw pi-plus',
-          items: [
-            {
-              label: 'Cuenta Ahorro/Efectivo/Cheques', routerLink: ["miscuentas"], command: (event) => {}
-            },
-            {
-              label: 'Tarjeta de Crédito',routerLink: ["credito"], command: ($event) => { }
-            },
-            {
-              label: 'Efectivo/Billetera',routerLink: ["billetera"], command: ($event) => {}
-            },
-            {
-              label: 'Hipoteca/Prestamo', command: ($event) => {}
-            },
-            {
-              label: 'Gasto/Ingreso', command: ($event) => {}
-            },
-            {
-              label: 'Chequera', routerLink: ["chequera"],command: ($event) => {}
-            },
-            {
-              label: 'Cheque', command: ($event) => {
-                this.index = $event;
-                this.mostrar(5)
-              }
-            }
-          ]
-        },
-        {
-          label: 'Nueva Grupo',
-          icon: 'pi pi-fw pi-plus',
-          routerLink : ["grupos"],
-          command: (index) => {
-          }
 
+    this.listitems = [
+      {label: 'Registrar Cuenta', icon: 'pi pi-fw pi-file' , disabled : this.comprobar(), command: (event) => {
 
+          this.index = 1
+          this.activeItem = this.listitems[0]
+          this.sendAccount = null;
+        
+
+      }},
+      {label: 'Consultar Cuentas', icon: 'pi pi-fw pi-search', disabled : this.comprobar(), command: (event) => {
+          this.index = 2
+          this.activeItem = this.listitems[1]
+          this.sendAccount = null;
+
+      }},
+      {label: 'Ajustar Saldo', icon: 'pi pi-fw pi-cog', disabled : this.comprobar(), command: (event) => {
+        if(this.index === 3){
+          this.index = 3
+          this.activeItem = this.listitems[2]
+          this.sendAccount = null;
         }
-          ,
-        { label: 'Open' },
-        { separator: true },
-        { label: 'Cerrar' }
-        ]
-      },
-      {
-        label: 'Editar',
-        icon: 'pi pi-fw pi-pencil',
-        items: [
-          { label: 'Delete', icon: 'pi pi-fw pi-trash' },
-          { label: 'Refresh', icon: 'pi pi-fw pi-refresh' }
-        ]
-      },
-      {
-        label: 'Consultar',
-        icon: 'pi pi-fw pi-search',
-        items: [
-          {
-            label: 'Cuentas', routerLink: ["saccount"],
-            command: (index) => {
-              //             this.mostrar(0);
-            }
-          },
-          {
-            label: 'Patrimonio', command: ($event) => {
-              this.index = $event;
-              //           this.mostrar(1);
-            }
-          },
-          {
-            label: 'Saldo Tarjeta de Crédito', command: ($event) => {
-              this.index = $event;
-              //         this.mostrar(1);
-            }
-          }, {
-            label: 'Saldo por Grupo', command: ($event) => {
-              this.index = $event;
-              //         this.mostrar(1);
-            }
-          }
-        ]
-      },
-      {
-        label: 'Actions',
-        icon: 'pi pi-fw pi-cog',
-        items: [
-          {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-              { label: 'Save', icon: 'pi pi-fw pi-save' },
-              { label: 'Update', icon: 'pi pi-fw pi-save' },
-            ]
-          },
-          {
-            label: 'Other',
-            icon: 'pi pi-fw pi-tags',
-            items: [
-              { label: 'Delete', icon: 'pi pi-fw pi-minus' }
-            ]
-          }
-        ]
-      },
-      { separator: true },
-      {
-        label: 'Cerrar', icon: 'pi pi-fw pi-times'
-      }
-    ];
+
+      }}
+  ];
+  }
+  comprobar(): boolean{
+    if(this.index == 3){
+      return true;
+    }else{
+      return false;
+    }
+   
   }
 
-  mostrar(n: number): void {
-    this.index = n;
+  mostrar(n: any): void {
+    console.log(n);
+  }
+
+  llenarCamposEditar(account : GenAccount){
+    this.sendAccount = account;
+    this.index = 1
+    this.activeItem = this.listitems[0]
+  }
+
+  generarCambio(n : number){
+    this.index = n
+    this.activeItem = this.listitems[n-1]
+  }
+
+  llenarCamposAdjuste(account : GenAccount){
+    this.sendAccountAdjustment = account;
+    this.index = 3
+    this.activeItem = this.listitems[2]
   }
 
 }

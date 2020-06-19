@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { User } from '../model/User'
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
+import { ChangePassword } from '../model/ChangePassword';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,15 @@ export class UserService {
   }
   public verifySesionUser(email : string): Observable<boolean>{
     return this.http.get<boolean>(environment.apiUrl + 'usuarios/validar-sesion/'+ email);
+  }
+
+  public changePasswordRequest(user : User): Observable<boolean>{
+    return this.http.put<boolean>(environment.apiUrl + 'usuarios/solicitar-cambio-contraseña/'+ user.email,user);
+  }
+
+  public changePassword(changePassword : ChangePassword): Observable<boolean>{
+    console.log(changePassword);
+    return this.http.put<boolean>(environment.apiUrl + 'usuarios/cambiar-contraseña/'+ changePassword.link +'/'+ changePassword.password,changePassword);
   }
 
 }

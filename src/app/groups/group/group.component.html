@@ -1,0 +1,30 @@
+<div style="margin-left: 15px;background-color: rgb(26,26,26); border-color: rgb(17,17,17);">
+    <div style="color: whitesmoke;font-family:helvetica;font-size: 30px; padding-left: 10px; padding-top: 5px;">
+        <b>Registrar</b></div>
+    <p-card>
+        <br>
+        <div class="ui-g">
+            <form [formGroup]="formGroup" (submit)="saveData( )">
+                <div class="ui-g-6 ui-md-6 ui-lg-12">
+                    <span class="ui-float-label">
+                        <input id="float-input" required type="text" size="40" formControlName="nombre" [(ngModel)]="selectedNombre" pInputText>
+                        <label for="float-input">Nombre del Grupo</label>
+                    </span>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                    <p-dropdown [options]="currency" formControlName="divisa" [(ngModel)]="selectedDivisa">
+                        <ng-template let-item pTemplate="selectedItem">
+                            {{item.label}}
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-md-6 ui-lg-12">
+                    <button pButton (click)="verificar()" type="button" label="{{label}}"
+                        class="ui-button-success"></button>
+                </div>
+            </form>
+        </div>
+    </p-card>
+</div>
+<!--<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>-->
+<p-toast [style]="{marginTop: '80px'}"></p-toast>

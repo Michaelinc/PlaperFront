@@ -8,12 +8,8 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { AccountComponent } from './account/account.component';
 import { SavingaccountComponent } from './account/savingaccount/savingaccount.component';
-import { CreditcardComponent } from './account/creditcard/creditcard.component';
-import { CheckbookComponent } from './account/checkbook/checkbook.component';
-import { CheckComponent } from './account/check/check.component';
-import { WalletComponent } from './account/wallet/wallet.component';
-import { LoginSigninComponent } from './login-signin/login-signin.component';
-import { TransactionComponent } from './transaction/transaction.component';
+
+import { TransactionComponent } from './transactions/transaction/transaction.component';
 
 import {SidebarModule} from 'primeng/sidebar';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -34,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import {TabViewModule} from 'primeng/tabview';
 import {SlideMenuModule} from 'primeng/slidemenu';
 import {CheckboxModule} from 'primeng/checkbox';
+import {TabMenuModule} from 'primeng/tabmenu';
 
 
 import { HttpClientModule } from '@angular/common/http'
@@ -41,7 +38,21 @@ import { ReactiveFormsModule } from '@angular/forms/';
 
 
 import { CommonModule } from '@angular/common';
-import { GroupComponent } from './group/group.component';
+import { GroupComponent } from './groups/group/group.component';
+import { ChangepasswordComponent } from './log/changepassword/changepassword.component';
+import { LoginSigninComponent } from './log/login-signin/login-signin.component';
+import { SavingaccounttableComponent } from './account/savingaccounttable/savingaccounttable.component';
+import { GroupsComponent } from './groups/groups.component';
+import { GrouptableComponent } from './groups/grouptable/grouptable.component';
+import { SettingComponent } from './setting/setting.component';
+import { CategoryComponent } from './setting/categories/category/category.component';
+import { TagComponent } from './setting/tag/tag.component';
+import { CategorytableComponent } from './setting/categories/categorytable/categorytable.component';
+import { CategoriesComponent } from './setting/categories/categories.component';
+import { AdjustmentComponent } from './account/adjustment/adjustment.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { TransactiontableComponent } from './transactions/transactiontable/transactiontable.component';
+import { AdjustmenttableComponent } from './transactions/adjustmenttable/adjustmenttable.component';
 
 
 @NgModule({
@@ -50,13 +61,22 @@ import { GroupComponent } from './group/group.component';
     MenuComponent,
     AccountComponent,
     SavingaccountComponent,
-    CreditcardComponent,
-    CheckbookComponent,
-    CheckComponent,
-    WalletComponent,
     LoginSigninComponent,
     TransactionComponent,
-    GroupComponent
+    GroupComponent,
+    ChangepasswordComponent,
+    SavingaccounttableComponent,
+    GroupsComponent,
+    GrouptableComponent,
+    SettingComponent,
+    CategoryComponent,
+    TagComponent,
+    CategorytableComponent,
+    CategoriesComponent,
+    AdjustmentComponent,
+    TransactionsComponent,
+    TransactiontableComponent,
+    AdjustmenttableComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +105,8 @@ import { GroupComponent } from './group/group.component';
     CommonModule,
     SlideMenuModule,
     ToastModule,
-    CheckboxModule
+    CheckboxModule,
+    TabMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
